@@ -1,26 +1,29 @@
-var app 		= require('express')();
+var express     = require('express');
+var app 		= express();
 var http 		= require('http').Server(app);
 var io 			= require('socket.io')(http);
 var validUrl 	= require('valid-url');
 
 app.get('/', function(req, res){
-  res.sendfile(__dirname + '/index.html');
+	res.sendfile(__dirname + '/index.html');
 });
 
+app.use("/assets", express.static(__dirname + '/assets'));
+
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
+	socket.on('chat message', function(msg){
 
-  	if(validUrl.isUri(msg))
-  	{
-  		io.emit('chat message', '<img src="'+msg+'" />');
-  		return;
-  	}
+	if(validUrl.isUri(msg))
+	{
+		io.emit('chat message', '<img src="'+msg+'" />');
+		return;
+	}
 
 
-    io.emit('chat message', msg);
-  });
+	io.emit('chat message', msg);
+	});
 });
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+	console.log('listening on *:3000');
 });
