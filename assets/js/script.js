@@ -1,4 +1,8 @@
 $(function() {
+	definePanelHeight();
+
+	$(window).on('resize', definePanelHeight);
+
 	var socket = io();
 
 	$('form').submit(function(){
@@ -7,11 +11,30 @@ $(function() {
 		return false;
 	});
 
-	socket.on('chat message', function(msg){
-		if(msg)
+	socket.on('chat message', function(response){
+		console.log(response);
+		var li = $('<li class="list-group-item">');
+
+		if(response.text)
 		{
-			$('#messages').append($('<li class="list-group-item">').html(msg));
+			li.html($('<div>').addClass('text').html(response.text));
 		}
-		$(window).scrollTop($(window).height());
+
+		if(response.media)
+		{
+			li.append($('<div>').addClass('media').html(response.media));
+		}
+
+		$('#messages').append(li);
+
+		$('.panel-body').scrollTop($('.panel-body').prop('scrollHeight'));
 	});
 });
+
+function definePanelHeight()
+{
+
+	$('.panel-body').css('height',
+		$(window).height()  - $('.panel-heading').height() - ($('.panel-footer').height() * 3.5)
+	);
+}

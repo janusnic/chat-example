@@ -37,7 +37,6 @@
     .panel-body
     {
         overflow-y: scroll;
-        height: 250px;
         padding: 0px;
     }
 

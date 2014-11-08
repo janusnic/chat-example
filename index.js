@@ -5,7 +5,7 @@ var io 			= require('socket.io')(http);
 var validUrl 	= require('valid-url');
 
 app.get('/', function(req, res){
-	res.sendfile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/index.html');
 });
 
 app.use("/assets", express.static(__dirname + '/assets'));
@@ -13,14 +13,24 @@ app.use("/assets", express.static(__dirname + '/assets'));
 io.on('connection', function(socket){
 	socket.on('chat message', function(msg){
 
-	if(validUrl.isUri(msg))
-	{
-		io.emit('chat message', '<img src="'+msg+'" />');
-		return;
-	}
+		var response = {};
 
+		response.text = msg;
 
-	io.emit('chat message', msg);
+		var splited = msg.split(' ');
+
+		for (i in splited)
+		{
+			// console.log(msgSplit[i]);
+			if(validUrl.isUri(splited[i]))
+			{
+				response.media = '<img src="'+splited[i]+'" />';
+			}
+		}
+
+		// console.log(response);
+
+		io.emit('chat message', response);
 	});
 });
 

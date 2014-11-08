@@ -3,8 +3,15 @@
   "version": "0.0.1",
   "description": "my first socket.io app",
   "dependencies": {
-    "express": "^4.3.2",
+    "express": "^4.10.1",
     "socket.io": "^1.2.0",
     "valid-url": "^1.0.9"
-  }
+  },
+  "repository": {
+	"type": "git",
+	"url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "scripts": {
+  	"start": "node index.js"
+  },
 }
