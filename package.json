@@ -9,9 +9,9 @@
   },
   "repository": {
 	"type": "git",
-	"url": "https://github.com/heroku/node-js-getting-started"
+	"url": "https://github.com/dishark/chat-example/"
   },
   "scripts": {
   	"start": "node index.js"
-  },
+  }
 }
