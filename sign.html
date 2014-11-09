@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Awesome Chat - Sign In</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+		  <h1>Wecome, human being!</h1>
+		  <p>Type your name and have fun.</p>
+		  <form action="/sign" method="post">
+		  	<div class="input-group">
+		  	  <span class="input-group-addon">@</span>
+		  	  <input type="text" class="form-control" placeholder="Username" name="name">
+		  	</div>
+		  </form>
+		</div>
+	</div>
+
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	<script src="assets/js/jquery-1.11.1.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>
