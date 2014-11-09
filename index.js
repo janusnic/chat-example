@@ -3,6 +3,7 @@ var app 		= express();
 var http 		= require('http').Server(app);
 var io 			= require('socket.io')(http);
 var validUrl 	= require('valid-url');
+var port = process.env.PORT || 3000
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
@@ -21,19 +22,16 @@ io.on('connection', function(socket){
 
 		for (i in splited)
 		{
-			// console.log(msgSplit[i]);
 			if(validUrl.isUri(splited[i]))
 			{
 				response.media = '<img src="'+splited[i]+'" />';
 			}
 		}
 
-		// console.log(response);
-
 		io.emit('chat message', response);
 	});
 });
 
-http.listen(80, function(){
-	console.log('listening on *:3000');
+http.listen(port, function(){
+	console.log('listening on *:' + port);
 });
