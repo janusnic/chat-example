@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res){
 
-	if(req.cookies.name == 'undefined')
+	if(!req.cookies.name || req.cookies.name == 'undefined')
 	{
 		res.redirect('sign');
 	}
