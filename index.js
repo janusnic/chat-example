@@ -5,6 +5,7 @@ var io 			= require('socket.io')(http);
 var validUrl 	= require('valid-url');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var sanitizeHtml = require('sanitize-html');
 var port = process.env.PORT || 3000
 
 app.use(cookieParser());
@@ -42,7 +43,7 @@ io.on('connection', function(socket){
 
 		var response = {};
 
-		response.text = input.message;
+		response.text = sanitizeHtml(input.message);
 		response.user = input.user;
 
 		var splited = input.message.split(' ');
